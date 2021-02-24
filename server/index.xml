@@ -1,0 +1,916 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MADAO&#39;s Blog</title>
+    <link>/</link>
+    <description>Recent content on MADAO&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This is a customized copyright.</copyright>
+    <lastBuildDate>Thu, 04 Feb 2021 13:21:39 +0800</lastBuildDate>
+    
+        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>[Nuxt 學習紀錄] Router</title>
+        <link>/posts/nuxt/router/</link>
+        <pubDate>Thu, 04 Feb 2021 13:21:39 +0800</pubDate>
+        
+        <guid>/posts/nuxt/router/</guid>
+        <description>MADAO&#39;s Blog /posts/nuxt/router/ -&lt;p&gt;在 Nuxt.js 專案中，不需要透過 &lt;code&gt;VueRouter&lt;/code&gt; 設定各個頁面的 URL 以及各種畫面結構安排。&lt;/p&gt;
+&lt;p&gt;而是會依據 &lt;code&gt;pages&lt;/code&gt; 的目錄結構會自動對應出 &lt;code&gt;VueRouter&lt;/code&gt; 的設定。&lt;/p&gt;
+&lt;h2 id=&#34;router&#34;&gt;Router&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;pages
+  ├ login
+  │   └ index.vue
+  └ admin
+      ├ index.vue
+      └ profile.vue
+&lt;/code&gt;&lt;/pre&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;路由 (URL)&lt;/th&gt;
+&lt;th&gt;page component&lt;/th&gt;
+&lt;th&gt;路由名稱 (Route Name)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;/login&lt;/td&gt;
+&lt;td&gt;pages/login/index.vue&lt;/td&gt;
+&lt;td&gt;login&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;/admin&lt;/td&gt;
+&lt;td&gt;pages/admin/index.vue&lt;/td&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;/admin/profile&lt;/td&gt;
+&lt;td&gt;pages/admin/profile.vue&lt;/td&gt;
+&lt;td&gt;admin-profile&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;NuxtLink to=&amp;quot;/&amp;quot;&amp;gt;Home page&amp;lt;/NuxtLink&amp;gt;&lt;/code&gt;
+而跳轉路由使用上與 VueRouter 相同。
+如果要&lt;/p&gt;
+&lt;h2 id=&#34;dynamic-router&#34;&gt;Dynamic Router&lt;/h2&gt;
+&lt;p&gt;在 Nuxt.js 中路由設定是以資料夾結構來設定，而要使用動態路由並傳遞參數時。&lt;/p&gt;
+&lt;p&gt;需要建立一個以&lt;strong&gt;下底線&lt;/strong&gt; 開頭的資料夾 &lt;code&gt;_&amp;lt;變數名稱&amp;gt;&lt;/code&gt; 或者 Vue 檔案 &lt;code&gt;_&amp;lt;變數名稱&amp;gt;.vue&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;單參數：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pages 
+  └ _id
+      └ profile.vue
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多組參數時：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pages 
+  └ _id
+      ├ profile.vue
+      └ _detial.vue
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;路由 (URL)&lt;/th&gt;
+&lt;th&gt;page component&lt;/th&gt;
+&lt;th&gt;路由名稱 (Route Name)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;/&lt;code&gt;id&lt;/code&gt;/profile&lt;/td&gt;
+&lt;td&gt;pages/&lt;code&gt;_id&lt;/code&gt;/profile.vue&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;id&lt;/code&gt;-profile&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;/&lt;code&gt;id&lt;/code&gt;/&lt;code&gt;detial&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;pages/&lt;code&gt;_id&lt;/code&gt;/&lt;code&gt;_detial&lt;/code&gt;.vue&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;id&lt;/code&gt;-&lt;code&gt;detial&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;此方式所傳遞的參數會儲存在&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;$route&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+  params&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+    id&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,
+    detial&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+  },
+  query&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Object&lt;/span&gt; (empty)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;調用時： &lt;code&gt;$route.params.&amp;lt;變數名稱&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果要傳遞 &lt;code&gt;query&lt;/code&gt; 的參數，則需要在 URL 的末端加上 &lt;code&gt;?&amp;lt;query變數名稱&amp;gt;=&amp;lt;query值&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;調用時： &lt;code&gt;$route.query.&amp;lt;變數名稱&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nested-router&#34;&gt;Nested Router&lt;/h2&gt;
+&lt;p&gt;當在頁面中，需要更改當前頁面的某些內容時，可以使用 nested router。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;建立一個 &lt;code&gt;&amp;lt;nested&amp;gt;.vue&lt;/code&gt; template ，並同時建立一個與 template 同名的資料夾，此資料夾的內部檔案就是 &lt;code&gt;/&amp;lt;nested&amp;gt;&lt;/code&gt; 的子路由。&lt;/li&gt;
+&lt;li&gt;template 與資料夾需要同層。&lt;/li&gt;
+&lt;li&gt;template &lt;code&gt;&amp;lt;nested&amp;gt;.vue&lt;/code&gt; 內要使用 &lt;code&gt;&amp;lt;nuxt-child /&amp;gt;&lt;/code&gt; 來指定子路由 template 要插入的位置。&lt;/li&gt;
+&lt;li&gt;預設載入的為 &lt;code&gt;index.vue&lt;/code&gt;，搭配路由切換顯示的路由。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;pages 
+  ├ nested
+  │   ├ index.vue
+  │   └ second.vue
+  └ nested.vue
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;/nested                               /nested/second
++------------------+                  +-----------------+
+| nested           |                  | nested          |
+| +--------------+ |                  | +-------------+ |
+| | index        | |  +------------&amp;gt;  | | second      | |
+| |              | |                  | |             | |
+| +--------------+ |                  | +-------------+ |
++------------------+                  +-----------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;properties&#34;&gt;Properties&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; {
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// Vue option API
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// Nuxt page properties：
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  head () {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; {};
+  },
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 透過 `vue-meta` 設定此頁面 head 相關資訊。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  loading&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 設定載入的時候，是否要顯示載入進度條，可於 nuxt.config.js 的 loading 設定(全域設定)。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  layout&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;darkMode&amp;#39;&lt;/span&gt;,
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 要套用 layouts 底下的哪個樣版。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  transition&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 透過 &amp;lt;transition&amp;gt; 設定轉場和動畫效果。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  scrollToTop&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;,
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 希望讓畫面回到最頂端可以將此屬性設為 true。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  middleware&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;auto&amp;#39;&lt;/span&gt;,
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 要套用 middleware 底下檔案。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// 套用多個可以使用陣列。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  validate (context) {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;;
+  },
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 用來檢查 URL 上的變數或是 vuex store 裡的資料。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;async&lt;/span&gt; asyncData(context) {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; {};
+  },
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 串接 API 取得資料的地方，藉此達到 SSR 的效果，
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// 需回傳物件且會自動 mapping、覆蓋 data 物件。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;async&lt;/span&gt; fetch(context) {},
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 與 asyncData 幾乎一樣，只差在沒有回傳物件。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// 建議將要存入 vuex store 的資料在這裡取得。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;context&#34;&gt;&lt;strong&gt;context&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;context&lt;/strong&gt; 是 Nuxt.js 新增的 objects/params ，主要作用於 Nuxt.js 本身的 lifecycle 區域，如：asyncData, fetch, plugins, middleware and nuxtServerInit 等。 &lt;a href=&#34;https://nuxtjs.org/docs/2.x/internals-glossary/context&#34;&gt;#&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;app： Vue 實例的根屬性包含所有 &lt;code&gt;nuxt.config.js&lt;/code&gt; 中註冊的所有 plugin。&lt;/li&gt;
+&lt;li&gt;store： Vuex Store 的實例。&lt;/li&gt;
+&lt;li&gt;route： Vuex Router 的實例。&lt;/li&gt;
+&lt;li&gt;params： URL 中的變數資料，同於 &lt;code&gt;this.$route.params&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;query： URL 中的 query string，同於 &lt;code&gt;this.$route.query&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;env： 設定於 &lt;code&gt;nuxt.config.js&lt;/code&gt; 內的環境變數。 &lt;a href=&#34;https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-env&#34;&gt;#&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;isDev： 是否為開發模式。&lt;code&gt;[boolean]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;isHMR：&lt;/li&gt;
+&lt;li&gt;redirect： 跳轉路由的方法。&lt;/li&gt;
+&lt;li&gt;error：&lt;/li&gt;
+&lt;li&gt;$config： &lt;a href=&#34;https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-runtime-config&#34;&gt;runtime config&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+- /posts/nuxt/router/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>[Nuxt 學習紀錄] Concept</title>
+        <link>/posts/nuxt/concept/</link>
+        <pubDate>Thu, 04 Feb 2021 13:12:53 +0800</pubDate>
+        
+        <guid>/posts/nuxt/concept/</guid>
+        <description>MADAO&#39;s Blog /posts/nuxt/concept/ -&lt;h2 id=&#34;views&#34;&gt;Views&lt;/h2&gt;
+&lt;p&gt;Nuxt.js Application 是由，app template, layout, 以及 page 等 component 所組合而成。&lt;/p&gt;
+&lt;p&gt;在不同的 component 中有對應的屬性以及方法可以使用。&lt;/p&gt;
+&lt;p&gt;比如：可以在每個 page component 內的 head 中自訂 meta tag 來優化 SEO。
+&lt;img src=&#34;/images/Nuxt/views.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nuxt-lifecycle&#34;&gt;Nuxt Lifecycle&lt;/h2&gt;
+&lt;p&gt;官方文件：&lt;a href=&#34;https://nuxtjs.org/docs/2.x/concepts/nuxt-lifecycle&#34;&gt;Nuxt Lifecycle&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;nuxtServerInit&lt;/code&gt;：用於在服務端操作 store 的，實質上就是一個 Action。&lt;/p&gt;
+&lt;p&gt;只能被定義於 &lt;code&gt;store/index.js&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;可以帶入 2 個參數。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一個：&lt;strong&gt;Vuex context&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;第二個：&lt;strong&gt;Nuxt.js context&lt;/strong&gt;。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// store/index.js
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; actions &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; {
+  nuxtServerInit(Vuex, Nuxt) {
+    &lt;span style=&#34;color:#6272a4&#34;&gt;// ...
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Middleware&lt;/code&gt;：頁面渲染之前執行的一個函式，這個函式可以使用在 nuxt.config.js、layouts 、 pages 中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// middleware/auth.js
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;function&lt;/span&gt;({store, route, redirect}) {
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// ...
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nuxt.config.js&lt;/code&gt;： 當每個路由改變時被調用。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;module.exports &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; {
+  router&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+    middleware&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;auth&amp;#39;&lt;/span&gt;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pages&lt;/code&gt;： 當進入設定 middleware 的頁面時才會調用。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;script&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; {
+    middleware&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;auth&amp;#39;&lt;/span&gt;
+  }
+&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout&lt;/code&gt;： 與 pages 應用上相同。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;validate&lt;/code&gt;：通常使用於驗證動態路由的參數&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;async&lt;/span&gt; validate({ params, query, store }) {
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// await operations
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#6272a4&#34;&gt;// 如果參數有效
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt; &lt;span style=&#34;color:#6272a4&#34;&gt;// 將停止Nuxt.js呈現頁面並顯示錯誤頁面
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;asyncData&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只可定義於 pages 內，並會在 pages 渲染前調用。&lt;/li&gt;
+&lt;li&gt;可以將資料寫入 store 內。&lt;/li&gt;
+&lt;li&gt;回傳物件會&lt;strong&gt;取代&lt;/strong&gt;當前 component 的 data。&lt;/li&gt;
+&lt;li&gt;帶入的第一個參數是當前 component 的 context。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://nuxtjs.org/examples/data-fetching-async-data&#34;&gt;Sample&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;async&lt;/span&gt; asyncData({store, route, params}) {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; {
+    &lt;span style=&#34;color:#6272a4&#34;&gt;// ...
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fetch&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只可定義於 pages 內，並會在 pages 渲染前調用。&lt;/li&gt;
+&lt;li&gt;與 &lt;code&gt;asyncData&lt;/code&gt; 幾乎同時觸發。&lt;/li&gt;
+&lt;li&gt;可以使用 &lt;code&gt;this&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;可以獲取資料並寫入 data 或者 store 內。&lt;/li&gt;
+&lt;li&gt;需 return Promise 物件，或者使用 &lt;code&gt;async/await&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://nuxtjs.org/examples/data-fetching-fetch-hook&#34;&gt;Sample&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- /posts/nuxt/concept/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>[Nuxt 學習紀錄] Initial</title>
+        <link>/posts/nuxt/install/</link>
+        <pubDate>Wed, 03 Feb 2021 19:03:49 +0800</pubDate>
+        
+        <guid>/posts/nuxt/install/</guid>
+        <description>MADAO&#39;s Blog /posts/nuxt/install/ -&lt;h2 id=&#34;nuxtjs-httpsnuxtjsorg&#34;&gt;Nuxt.js &lt;a href=&#34;https://nuxtjs.org/&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Nuxt.js 是基於 Vue.js 的應用框架，支援不同的渲染方式(SSR、SPA 或靜態)。&lt;/p&gt;
+&lt;h2 id=&#34;install--安裝&#34;&gt;install / 安裝&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;npx create-nuxt-app &amp;lt;project-name&amp;gt;
+&lt;span style=&#34;color:#6272a4&#34;&gt;# &amp;lt;project-name&amp;gt; 專案名稱&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安裝時需要確認，且可依照專案需求進行設定&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;? Project name: &lt;span style=&#34;color:#6272a4&#34;&gt;# 專案名稱&lt;/span&gt;
+? Programming language: &lt;span style=&#34;color:#6272a4&#34;&gt;# 開發語言：JS or TS&lt;/span&gt;
+? Package manager: &lt;span style=&#34;color:#6272a4&#34;&gt;# package 管理器 Npm or Yarn&lt;/span&gt;
+? UI framework: &lt;span style=&#34;color:#6272a4&#34;&gt;# UI 框架&lt;/span&gt;
+? Nuxt.js modules: &lt;span style=&#34;color:#6272a4&#34;&gt;# 模組&lt;/span&gt;
+? Linting tools:
+? Testing framework: &lt;span style=&#34;color:#6272a4&#34;&gt;# 測試框架&lt;/span&gt;
+? Rendering mode: &lt;span style=&#34;color:#6272a4&#34;&gt;# 渲染模式&lt;/span&gt;
+  &amp;gt; Universal &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;SSR / SSG&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#6272a4&#34;&gt;# 伺服器渲染&lt;/span&gt;
+    Single Page App &lt;span style=&#34;color:#6272a4&#34;&gt;# 單頁式應用&lt;/span&gt;
+? Deployment target: &lt;span style=&#34;color:#6272a4&#34;&gt;# 部屬方式&lt;/span&gt;
+  &amp;gt; Server &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;Node.js hosting&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;
+    Static &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;Static/JAMStack hosting&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;
+? Development tools: &lt;span style=&#34;color:#6272a4&#34;&gt;# 部屬工具&lt;/span&gt;
+? Continuous integration:
+? Version control system: &lt;span style=&#34;color:#6272a4&#34;&gt;# 版控工具&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;指令&#34;&gt;指令&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;開發模式
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;npm run start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;編譯成產品
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;npm run build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;後端執行(SSR)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;npm run start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;發布靜態網頁
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;npm run generate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;資料夾配置&#34;&gt;資料夾配置&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; ┬ assets
+ │ &lt;span style=&#34;color:#6272a4&#34;&gt;# 存放會被 webpack 編譯的靜態檔案。如：Sass 等&lt;/span&gt;
+ ┼ components
+ │ &lt;span style=&#34;color:#6272a4&#34;&gt;# 主要存放可共用或可重複使用的 Vue.js components&lt;/span&gt;
+ ┼ layouts
+ │ &lt;span style=&#34;color:#6272a4&#34;&gt;# 主要存放網頁布局的地方， default 或者 custom 以及 error page&lt;/span&gt;
+ ┼ pages
+ │ &lt;span style=&#34;color:#6272a4&#34;&gt;# Nuxt 會依據內部的檔案以及資料夾產生 router&lt;/span&gt;
+ ┼ static
+ │ &lt;span style=&#34;color:#6272a4&#34;&gt;# 存放不會被編譯的靜態檔案。如：圖片 等&lt;/span&gt;
+ ┼ plugins
+ │ &lt;span style=&#34;color:#6272a4&#34;&gt;# 注入 vue instance 的套件。&lt;/span&gt;
+ ┼ middleware
+ │ &lt;span style=&#34;color:#6272a4&#34;&gt;# 自訂進入 layouts 或是 pages 開始渲染的方法，如：驗證登入狀態。&lt;/span&gt;
+ ┼ store
+ │ &lt;span style=&#34;color:#6272a4&#34;&gt;# 存放 Vuex Store的檔案。&lt;/span&gt;
+ ┴ nuxt.config.js
+   &lt;span style=&#34;color:#6272a4&#34;&gt;# Nuxt 主要的設定檔案。&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;nuxtconfigjs--設定檔&#34;&gt;&lt;code&gt;nuxt.config.js&lt;/code&gt; / 設定檔&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; {
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// HTML Header 設定
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// See: https://go.nuxtjs.dev/config-head
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  head&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+    title&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;NuxtTodo&amp;#39;&lt;/span&gt;,
+    htmlAttrs&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+      lang&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;en&amp;#39;&lt;/span&gt;
+    },
+    meta&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; [
+      { charset&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt; },
+      { name&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;viewport&amp;#39;&lt;/span&gt;, content&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;width=device-width, initial-scale=1&amp;#39;&lt;/span&gt; },
+      { hid&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;description&amp;#39;&lt;/span&gt;, name&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;description&amp;#39;&lt;/span&gt;, content&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; }
+    ],
+    link&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; [
+      { rel&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;icon&amp;#39;&lt;/span&gt;, type&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;image/x-icon&amp;#39;&lt;/span&gt;, href&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;/favicon.ico&amp;#39;&lt;/span&gt; }
+    ]
+  },
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 全域載入 CSS 檔案
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// See: https://go.nuxtjs.dev/config-css
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  css&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; [],
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 對應 plugins 資料夾，載入第 3 方套件。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// See: https://go.nuxtjs.dev/config-plugins
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  plugins&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; [],
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 不需要再手動 import components
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// See: https://go.nuxtjs.dev/config-components
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  components&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// Modules for dev and build (recommended)
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// See: https://go.nuxtjs.dev/config-modules
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  buildModules&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; [],
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 加入模組化套件
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// See: https://go.nuxtjs.dev/config-modules
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  modules&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; [],
+  &lt;span style=&#34;color:#6272a4&#34;&gt;// 編譯的設定
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#6272a4&#34;&gt;// See: https://go.nuxtjs.dev/config-build
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;  build&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {},
+  router&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+    middleware&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; [&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;auth&amp;#39;&lt;/span&gt;]
+  },
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;其他設定&#34;&gt;其他設定&lt;/h3&gt;
+&lt;h4 id=&#34;mode&#34;&gt;&lt;strong&gt;mode&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Nuxt 除了編譯靜態頁面，另外提供兩種模式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;universal&lt;/code&gt;: 同構架構(Isomorphic)，有SSR+CSR(包含 client-side navigation)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;spa&lt;/code&gt;: 僅有 CSR (包含 client-side navigation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;env&#34;&gt;&lt;strong&gt;env&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;此參數可以設定環境變數，當編譯後會自動取代。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; {
+  env&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+    baseURL&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; process.env.BASE_URL
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;router&#34;&gt;&lt;strong&gt;router&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;此參數會覆蓋 Nuxt.js 預設產生的 router 設定。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; {
+  router&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+    linkExactActiveClass&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;text-primary&amp;#39;&lt;/span&gt;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;官方文檔&lt;/strong&gt;：&lt;a href=&#34;https://nuxtjs.org/docs/2.x/directory-structure/nuxt-config&#34;&gt;nuxt.config&lt;/a&gt;&lt;/p&gt;
+- /posts/nuxt/install/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Cookie</title>
+        <link>/posts/js/cookie/</link>
+        <pubDate>Wed, 03 Feb 2021 14:22:24 +0800</pubDate>
+        
+        <guid>/posts/js/cookie/</guid>
+        <description>MADAO&#39;s Blog /posts/js/cookie/ -&lt;h2 id=&#34;cookie-是什麼&#34;&gt;Cookie 是什麼？&lt;/h2&gt;
+&lt;p&gt;Cookie 是儲存在瀏覽器的一小段文字資料。只可儲存 4KB 的資料。&lt;/p&gt;
+&lt;p&gt;伺服器透過 &lt;code&gt;Set-Cookie&lt;/code&gt; header 傳遞給瀏覽器，之後會將 cookie 儲存起來，並在發送 request 時夾帶 cookie 至 server。&lt;/p&gt;
+&lt;h2 id=&#34;cookie-的用途&#34;&gt;Cookie 的用途？&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Session 管理：帳號登入、購物車、遊戲分數，等儲存於 server 上的資訊。&lt;/li&gt;
+&lt;li&gt;個人化：使用者設定、佈景主題，以及其他設定。&lt;/li&gt;
+&lt;li&gt;追蹤：記錄並分析使用者行為，或者廣告應用上。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用-javascript-讀取--寫入-cookie&#34;&gt;使用 JavaScript 讀取 / 寫入 Cookie&lt;/h2&gt;
+&lt;h3 id=&#34;讀取&#34;&gt;讀取&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Vanilla JavaScript - 內建功能 &lt;code&gt;document.cookie&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;讀取出來的 &lt;code&gt;document.cookie&lt;/code&gt; 為一個字串，此字串是將目前網域底下所有的 cookie 以分號串接以後的結果，其中每個 cookie 都是 &lt;code&gt;[cookie名稱]=[cookie值]&lt;/code&gt; 的形式。&lt;/p&gt;
+&lt;p&gt;如果要取得特定的 cookie 的值可以透過 &lt;code&gt;String.replace()&lt;/code&gt; 加上 RegExp 的方式來取得。&lt;a href=&#34;https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie&#34;&gt;#&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 將 test 改為要取得的 cookie 名稱
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; getCookie &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;document&lt;/span&gt;.cookie.replace(&lt;span style=&#34;color:#f1fa8c&#34;&gt;/(?:(?:^|.*;\s*)test\s*\=\s*([^;]*).*$)|^.*$/&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;$1&amp;#34;&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Library - 使用套件可以方便快速的取得 cookie 的值。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/js-cookie/js-cookie&#34;&gt;js-cookie&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/jshttp/cookie&#34;&gt;cookie&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;寫入&#34;&gt;寫入&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Vanilla JavaScript&lt;/p&gt;
+&lt;p&gt;寫入 cookie 的方式是 &lt;code&gt;document.cookie = &#39;key=value;&#39;&lt;/code&gt;，只有我們指定的 key 會被更新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;cookie-參數&#34;&gt;Cookie 參數&lt;/h2&gt;
+&lt;p&gt;新增參數的方式是用分號區隔各個參數&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Domain&lt;/code&gt; ：用來指定哪些網域可以存取這個 cookie。&lt;/p&gt;
+&lt;p&gt;預設值是當前網域，但是不包含其子網域。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Path&lt;/code&gt; ：參數用來指定哪些路徑可以存取這個 cookie。&lt;/p&gt;
+&lt;p&gt;預設值是當前的路徑。可以設成 &lt;code&gt;path=/&lt;/code&gt;，讓全站都可以存取此 cookie。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Expires&lt;/code&gt;, &lt;code&gt;Max-age&lt;/code&gt; ：參數的作用是設定 cookie 的有效期限。&lt;/p&gt;
+&lt;p&gt;如果沒有設定 &lt;code&gt;expires&lt;/code&gt; 或 &lt;code&gt;max-age&lt;/code&gt; 參數，當瀏覽器關閉之後，儲存在瀏覽器的 cookie 便會消失，這就是所謂的 session cookie。
+反之如果設定了&lt;code&gt;expires&lt;/code&gt; 或 &lt;code&gt;max-age&lt;/code&gt; 參數，當瀏覽器關閉之後， cookie 便會儲存於瀏覽器中。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;expires&lt;/code&gt; ： 以 UTC 格式表示的有效期限。 &lt;code&gt;new Date().toUTCString()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;max-age&lt;/code&gt; ： 從設定開始算幾秒之內 cookie 是有效的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Secure&lt;/code&gt; ：參數的作用是讓 cookie 只能透過 https 傳遞。&lt;/p&gt;
+&lt;p&gt;Cookie 預設是不區分 http 或是 https。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;HttpOnly&lt;/code&gt; ：參數的作用是防止 JavaScript 存取 cookie。&lt;/p&gt;
+&lt;p&gt;防止受到 XSS Attack (Cross-Site Scripting，跨站腳本攻擊) 的風險。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;SameSite&lt;/code&gt; ：作用是防止 cookie 以跨站方式傳送，可以幫助避免 CSRF (Cross-Site Request Forgery，跨站請求偽造) 攻擊。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- /posts/js/cookie/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>[演算法] Insertion Sort / 插入排序</title>
+        <link>/posts/algorithm/insertion_sort/</link>
+        <pubDate>Mon, 01 Feb 2021 14:34:22 +0800</pubDate>
+        
+        <guid>/posts/algorithm/insertion_sort/</guid>
+        <description>MADAO&#39;s Blog /posts/algorithm/insertion_sort/ -&lt;h2 id=&#34;bubble-sort--泡沫排序&#34;&gt;Bubble Sort / 泡沫排序&lt;/h2&gt;
+&lt;p&gt;插入排序與泡沫排序同為排序演算法中比較基礎的方式，所需的時間會隨著數列的長度&lt;strong&gt;平方成長&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;排序方式為從一個數列中，由第二個元素開始往前逐一比較，再將元素插入適當的位置。&lt;/p&gt;
+&lt;p&gt;可以參考動態的&lt;a href=&#34;https://visualgo.net/en/sorting&#34;&gt;視覺網站&lt;/a&gt;，可以比較清楚的知道排序的方式。&lt;/p&gt;
+&lt;h2 id=&#34;排序流程&#34;&gt;排序流程&lt;/h2&gt;
+&lt;p&gt;假設目前有一數列 &lt;code&gt;[8, 5, 10, 6]&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第一輪排序。
+&lt;ol&gt;
+&lt;li&gt;取 5 開始往前比較， 8 &amp;gt; 5 ，交換。&lt;code&gt;[5, 8, 10, 6]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;第二輪排序
+&lt;ol&gt;
+&lt;li&gt;取 10 開始往前比較，8 &amp;lt; 10 不交換。&lt;/li&gt;
+&lt;li&gt;再往前比較， 5 &amp;lt; 10 不交換。&lt;code&gt;[5, 8, 10, 6]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;第三輪排序
+&lt;ol&gt;
+&lt;li&gt;取 6 開始往前比較， 10 &amp;gt; 6 交換。&lt;code&gt;[5, 8, 6, 10]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;再往前比較， 8 &amp;gt; 6 交換。&lt;code&gt;[5, 6, 8, 10]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;再往前比較， 5 &amp;lt; 6 不交換。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;排序完成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;以上流程，排序次數為&lt;strong&gt;數列長度 - 1&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;時間複雜度&#34;&gt;時間複雜度&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;要執行 n - 1 輪，每輪要比較 1 &amp;hellip; n-1 次。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;當數列元素有 4 個時，需要比對 $1 + 2 + 3 = 6$ 次。&lt;/li&gt;
+&lt;li&gt;當數列元素有 5 個時，需要比對 $1 + 2 + 3 + 4 = 10$ 次。&lt;/li&gt;
+&lt;li&gt;當數列元素有 n 個時，需要比對
+&lt;ul&gt;
+&lt;li&gt;$1 + &amp;hellip; (n - 1) = (n * (n - 1))/2 = n^2/2 - n/2$ (等差級數)&lt;/li&gt;
+&lt;li&gt;當 n 有無限 $\infty$ 多個元素時，平方以外的值可以忽略不計。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Insertion Sort 的時間複雜度為 &lt;strong&gt;$O(n^2)$&lt;/strong&gt;，平方成長。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;javascript-插入排序&#34;&gt;JavaScript 插入排序&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;function&lt;/span&gt; insertionSort(arr) {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; arr.length; i&lt;span style=&#34;color:#ff79c6&#34;&gt;++&lt;/span&gt;) {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; j &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;; j &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; j&lt;span style=&#34;color:#ff79c6&#34;&gt;--&lt;/span&gt;) {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (arr[j] &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; arr[j &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]) {
+        [arr[j], arr[j &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [arr[j &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;], arr[j]]
+      }
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;當原始陣列已為已排序時&#34;&gt;當原始陣列已為已排序時&lt;/h2&gt;
+&lt;p&gt;當傳入資料已經為排序完成的數列時，在整輪的排序中都沒有交換，可直接判斷排序完成。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;function&lt;/span&gt; insertionSort(arr) {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; arr.length; i&lt;span style=&#34;color:#ff79c6&#34;&gt;++&lt;/span&gt;) {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; j &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;; j &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; j&lt;span style=&#34;color:#ff79c6&#34;&gt;--&lt;/span&gt;) {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (arr[j] &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; arr[j &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]) {
+        [arr[j], arr[j &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [arr[j &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;], arr[j]]
+      } &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; {
+        &lt;span style=&#34;color:#6272a4&#34;&gt;// 當判斷順序不須交換時結束此圈。
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;break&lt;/span&gt;;
+      }
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /posts/algorithm/insertion_sort/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>[演算法] Bubble Sort / 泡沫排序</title>
+        <link>/posts/algorithm/bubble_sort/</link>
+        <pubDate>Mon, 01 Feb 2021 10:49:42 +0800</pubDate>
+        
+        <guid>/posts/algorithm/bubble_sort/</guid>
+        <description>MADAO&#39;s Blog /posts/algorithm/bubble_sort/ -&lt;h2 id=&#34;bubble-sort--泡沫排序&#34;&gt;Bubble Sort / 泡沫排序&lt;/h2&gt;
+&lt;p&gt;泡沫排序是排序演算法中比較基礎的方式，所需的時間會隨著數列的長度&lt;strong&gt;平方成長&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;排序方式為從一個數列中，由左至右取出兩個元素比較，將較大的元素與較小的元素交換，反之則不動，直到整個數列排序完成。&lt;/p&gt;
+&lt;p&gt;可以參考動態的&lt;a href=&#34;https://visualgo.net/en/sorting&#34;&gt;視覺網站&lt;/a&gt;，可以比較清楚的知道排序的方式。&lt;/p&gt;
+&lt;h2 id=&#34;排序流程&#34;&gt;排序流程&lt;/h2&gt;
+&lt;p&gt;假設目前有一數列 &lt;code&gt;[8, 5, 10, 6]&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第一輪排序。
+&lt;ol&gt;
+&lt;li&gt;$8 &amp;gt; 5$ 交換。&lt;code&gt;[5, 8, 10, 6]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;$8 &amp;lt; 10$ 不須交換。&lt;/li&gt;
+&lt;li&gt;$10 &amp;gt; 6$ 交換。&lt;code&gt;[5, 8, 6, 10]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;最大值 10 排到最右邊，共比對 3 次。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第二輪排序。
+&lt;ol&gt;
+&lt;li&gt;$5 &amp;lt; 8$ 不須交換。&lt;/li&gt;
+&lt;li&gt;$8 &amp;gt; 6$ 交換。&lt;code&gt;[5, 6, 8, 10]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;只需比對到倒數第二個，共比對 2 次。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第三輪排序
+&lt;ol&gt;
+&lt;li&gt;$5 &amp;lt; 6$ 不須交換。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;只需比對到倒數第三個，共比對 1 次。 &lt;code&gt;[5, 6, 8, 10]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;排序完成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;以上流程，排序次數為&lt;strong&gt;數列長度 - 1&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;時間複雜度&#34;&gt;時間複雜度&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;要執行 n - 1 輪，每輪要比較 n-1 &amp;hellip; 1 次。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;當數列元素有 4 個時，需要比對 $3 + 2 + 1 = 6$ 次。&lt;/li&gt;
+&lt;li&gt;當數列元素有 5 個時，需要比對 $4 + 3 + 2 + 1 = 10$ 次。&lt;/li&gt;
+&lt;li&gt;當數列元素有 n 個時，需要比對
+&lt;ul&gt;
+&lt;li&gt;$(n-1) + (n-2) + &amp;hellip; + 1 = (n * (n - 1))/2 = n^2/2 - n/2$ (等差級數)&lt;/li&gt;
+&lt;li&gt;當 n 有無限 $\infty$ 多個元素時，平方以外的值可以忽略不計。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Bubble Sort 的時間複雜度為 &lt;strong&gt;$O(n^2)$&lt;/strong&gt;，平方成長。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;javascript-泡沫排序&#34;&gt;JavaScript 泡沫排序&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;function&lt;/span&gt; bubbleSort(arr) {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; arr.length &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; i&lt;span style=&#34;color:#ff79c6&#34;&gt;--&lt;/span&gt;) {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; j &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; j &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; i; j&lt;span style=&#34;color:#ff79c6&#34;&gt;++&lt;/span&gt;) {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (arr[j] &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; arr[j &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]) {
+      &lt;span style=&#34;color:#6272a4&#34;&gt;// 順序交換
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;      [arr[j], arr[j&lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [arr[j&lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;], arr[j]]
+    }
+  }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;當原始陣列已為已排序時&#34;&gt;當原始陣列已為已排序時&lt;/h2&gt;
+&lt;p&gt;當傳入資料已經為排序完成的數列時，在整輪的排序中都沒有交換，可直接判斷排序完成。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;function&lt;/span&gt; bubbleSort(arr) {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; arr.length &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; i&lt;span style=&#34;color:#ff79c6&#34;&gt;--&lt;/span&gt;) {
+    &lt;span style=&#34;color:#6272a4&#34;&gt;// flag 紀錄有沒有執行過交換
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; swap &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; j &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; j &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; i; j&lt;span style=&#34;color:#ff79c6&#34;&gt;++&lt;/span&gt;) {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (arr[j] &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; arr[j &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]) {
+        [arr[j], arr[j&lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [arr[j&lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;], arr[j]]
+        swap &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;;
+      }
+    }
+    &lt;span style=&#34;color:#6272a4&#34;&gt;// 當都沒有交換的情況，直接判斷排序完成
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;!&lt;/span&gt;swap) {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;break&lt;/span&gt;;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /posts/algorithm/bubble_sort/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>網路基礎</title>
+        <link>/posts/internetintro/</link>
+        <pubDate>Fri, 29 Jan 2021 19:42:05 +0800</pubDate>
+        
+        <guid>/posts/internetintro/</guid>
+        <description>MADAO&#39;s Blog /posts/internetintro/ -&lt;p&gt;瀏覽器上所顯示的頁面資料是如何而來的?&lt;/p&gt;
+&lt;p&gt;當在瀏覽器輸入網址並送出後，到底發生了什麼事？&lt;/p&gt;
+&lt;p&gt;在了解之前先了解一下基本名詞。&lt;/p&gt;
+&lt;h2 id=&#34;基本名詞&#34;&gt;基本名詞&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;IP&lt;/strong&gt; / &lt;strong&gt;I&lt;/strong&gt;nternet &lt;strong&gt;P&lt;/strong&gt;rotocol &lt;a href=&#34;https://zh.wikipedia.org/wiki/%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AE&#34;&gt;#&lt;/a&gt;
+&lt;blockquote&gt;
+&lt;p&gt;IP 定義了定址方法和資料報的封裝結構，任務僅僅是根據源主機和目的主機的位址來傳送資料。
+IP 由 4 組 4 個數字組成，每組的範圍是 0 ~ 255。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Domain Name&lt;/strong&gt; / 域名 &lt;a href=&#34;https://zh.wikipedia.org/wiki/%E5%9F%9F%E5%90%8D&#34;&gt;#&lt;/a&gt;
+&lt;blockquote&gt;
+&lt;p&gt;IP 位置是以沒有含意的數字組成  人類不好記憶，而域名可以視為 IP 地址的代稱，主要為了方便記憶。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNS&lt;/strong&gt; / &lt;strong&gt;D&lt;/strong&gt;omain &lt;strong&gt;N&lt;/strong&gt;ame &lt;strong&gt;S&lt;/strong&gt;ystem &lt;a href=&#34;https://zh.wikipedia.org/wiki/%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F&#34;&gt;#&lt;/a&gt;
+&lt;blockquote&gt;
+&lt;p&gt;主要將方便記憶的 Domain Name 轉換為 Server 的 IP 位置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;粗略流程&#34;&gt;粗略流程&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/images/internet.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mermaid&#34; data-lang=&#34;mermaid&#34;&gt;sequenceDiagram
+    participant Client
+    participant DNS
+    Client--&amp;gt;&amp;gt;DNS: Domain 的 IP?
+    DNS--&amp;gt;&amp;gt;Client: Server 的 IP 是 xxx.xxx.xxx.xxx!
+    Client-&amp;gt;&amp;gt;Server: Request
+    Note Right of Client:Get/index.html
+    Server-&amp;gt;&amp;gt;Client: Response
+    Note Left of Server:Status 200 OK
+    Client-&amp;gt;&amp;gt;Server: Request
+    Note Right of Client:Get/style.css&amp;lt;br /&amp;gt;Get/scripts.js
+    Server-&amp;gt;&amp;gt;Client: Response
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;當瀏覽器(Client)送出網址後會先詢問 DNS Server 將域名轉換成 Server 的 IP 位置。&lt;/li&gt;
+&lt;li&gt;Client 會發送 request 給 Server 端。&lt;/li&gt;
+&lt;li&gt;Server 端解析 Request 後回傳 Response&lt;/li&gt;
+&lt;li&gt;Client 接收並解析 Response 、解析 .html 檔案。&lt;/li&gt;
+&lt;li&gt;根據 .html 的內容，一旦發現有 CSS、JS 或 image 等檔案，會再發送個 Request 。&lt;/li&gt;
+&lt;li&gt;開始下載需要的檔案（CSS、JS 或 image）。&lt;/li&gt;
+&lt;li&gt;渲染網頁。&lt;/li&gt;
+&lt;/ol&gt;
+- /posts/internetintro/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>儲存空間單位</title>
+        <link>/posts/storage/</link>
+        <pubDate>Fri, 29 Jan 2021 19:40:41 +0800</pubDate>
+        
+        <guid>/posts/storage/</guid>
+        <description>MADAO&#39;s Blog /posts/storage/ -&lt;h2 id=&#34;基本名詞&#34;&gt;基本名詞&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bit&lt;/strong&gt; / 位元
+&lt;blockquote&gt;
+&lt;p&gt;儲存的最小單位，只能儲存 0 、 1 。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Byte&lt;/strong&gt; / 位元組
+&lt;blockquote&gt;
+&lt;p&gt;一個位元組代表八個位元。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KB&lt;/strong&gt; / Kilobyte
+&lt;blockquote&gt;
+&lt;p&gt;Kilo + byte 。 1KB = 1024 bytes&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MB&lt;/strong&gt; / Megabyte
+&lt;blockquote&gt;
+&lt;p&gt;Mega + byte 。 1MB = 1024 KB&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GB&lt;/strong&gt; / Gigabyte
+&lt;blockquote&gt;
+&lt;p&gt;Giga + byte 。 1GB = 1024 MB&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;數字的儲存方式&#34;&gt;數字的儲存方式&lt;/h2&gt;
+&lt;h3 id=&#34;正整數&#34;&gt;正整數&lt;/h3&gt;
+&lt;p&gt;通常數字使用 32 個 bit 來儲存，也就是 4 bytes。&lt;/p&gt;
+&lt;p&gt;範圍：$2^{32} = 4,294,967,296 $&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;假設數字使用 8 bit 儲存。
+0000 1010 = 10
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;負數&#34;&gt;負數&lt;/h3&gt;
+&lt;p&gt;負數的儲存定義為：&lt;strong&gt;將正數的所有位元顛倒後 + 1&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;假設數字使用 8 bit 儲存。
+1111 0110 = -10
+&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
+&lt;li&gt;第一個 bit 代表正負。 0：正數 、 1：負數。&lt;/li&gt;
+&lt;li&gt;運算方便&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;假設數字使用 8 bit 儲存。
+   0000 1010
+ + 1111 0110
+ -------------
+ 1 0000 0000
+將超過 8 bit 的部分捨去，結果為 0 。
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;正負數範圍&#34;&gt;正負數範圍&lt;/h3&gt;
+&lt;p&gt;範圍：$-2^{31}$ ~ $2^{31} - 1$&lt;/p&gt;
+&lt;h3 id=&#34;overflow--溢位&#34;&gt;overflow / 溢位&lt;/h3&gt;
+&lt;p&gt;當目前儲存的數字超過可以表示的範圍，會出現一些奇怪的情況。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;假設數字使用 8 bit 儲存。
+目前數字可以表示的範圍為： -2^7 ~ 2^7 - 1
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;浮點數的儲存方式&#34;&gt;浮點數的儲存方式&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/images/floatBinary.png&#34; alt=&#34;Float Binary Data&#34;&gt;&lt;/p&gt;
+&lt;p&gt;前提：因電腦空間限制，無法以有限的空間來表示無限的數字，無法非常精準。&lt;/p&gt;
+&lt;p&gt;而小數使用 64 個 bit 來儲存並將之分為 3 個部分。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sign / 符號： 正負值。&lt;/li&gt;
+&lt;li&gt;exponent / 指數： $10^{-n}$。&lt;/li&gt;
+&lt;li&gt;fraction / 數字： 儲存數字的部分。&lt;/li&gt;
+&lt;/ul&gt;
+- /posts/storage/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>進位</title>
+        <link>/posts/positionalnotation/</link>
+        <pubDate>Fri, 29 Jan 2021 16:29:57 +0800</pubDate>
+        
+        <guid>/posts/positionalnotation/</guid>
+        <description>MADAO&#39;s Blog /posts/positionalnotation/ -&lt;blockquote&gt;
+&lt;p&gt;進位制是一種記數方式。利用這種記數法，可以使用有限種數字符號來表示所有的數值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十進位&#34;&gt;十進位&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;基數&lt;/th&gt;
+&lt;th&gt;進位制&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;十進位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;世界上最常見的算術運算位進制系統。其十位數字為 「0-9」。
+當碰到十本身就會進位。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0, 1, 2, 3, 4, 5, 6, 7 ,8 ,9 =(進位)&amp;gt; 10, 11 ~~ 99 =(進位)&amp;gt; 100 ...
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;以數學來表示&#34;&gt;以數學來表示&lt;/h3&gt;
+&lt;p&gt;以 &lt;strong&gt;10&lt;/strong&gt; 為基數&lt;/p&gt;
+&lt;p&gt;$ 123 = 1 * 10^2 + 2 * 10^1 + 3 * 10^0 $&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二進位&#34;&gt;二進位&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;基數&lt;/th&gt;
+&lt;th&gt;進位制&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;二進位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;幾乎所有的電子計算機內部都使用二進位制，分別為「0」和「1」表示「關」和「開」。
+當碰到 2 本身就會進位。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0, 1 =(進位)&amp;gt; 10, 11 =&amp;gt; 100, 101, 111 ...
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;以數學來表示-1&#34;&gt;以數學來表示&lt;/h3&gt;
+&lt;p&gt;以 &lt;strong&gt;2&lt;/strong&gt; 為基數&lt;/p&gt;
+&lt;p&gt;$ 1010 = 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 0*2^0 $&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;八進位&#34;&gt;八進位&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;基數&lt;/th&gt;
+&lt;th&gt;進位制&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;八進位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;八位數字為「0-7」。當碰到 8 本身就會進位。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0, 1, 2, 3, 4, 5, 6, 7 =(進位)&amp;gt; 10, 11 ~ 17 =(進位)&amp;gt; 20 ...
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;以數學來表示-2&#34;&gt;以數學來表示&lt;/h3&gt;
+&lt;p&gt;以 &lt;strong&gt;8&lt;/strong&gt; 為基數&lt;/p&gt;
+&lt;p&gt;$ 123 = 1 * 8^2 + 2 * 8^1 + 3 * 8^0 $&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十六進位&#34;&gt;十六進位&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;基數&lt;/th&gt;
+&lt;th&gt;進位制&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;td&gt;十六進位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;經常用於計算機領域。
+十六位數字為「0-9」，之後以英文字母代替「A-F」。當到十六就會進位。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0, 1, 2 ~ 9, A, B, C, D, E, F =(進位)&amp;gt; 10, 11 ~ 1A, 1B ~ 1F =(進位)&amp;gt; 20 ...
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;練習&#34;&gt;練習&lt;/h2&gt;
+&lt;p&gt;將 80 轉成 2 進位&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Binary =&amp;gt; 1, 2, 4, 8, 16, 32, 64, 128, ...&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;找出最接近 80 的 2 進位數值  &lt;code&gt;80 = 64 + 16&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;個別轉換成 2 進位後再相加&lt;/li&gt;
+&lt;li&gt;$64 = 1,000,000 $&lt;/li&gt;
+&lt;li&gt;$16 = 10,000$&lt;/li&gt;
+&lt;li&gt;轉換後結果 $80 = 1,010,000$&lt;/li&gt;
+&lt;/ol&gt;
+- /posts/positionalnotation/ - This is a customized copyright.</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>基礎計算機概論</title>
+        <link>/posts/intro2computer/</link>
+        <pubDate>Fri, 29 Jan 2021 16:00:28 +0800</pubDate>
+        
+        <guid>/posts/intro2computer/</guid>
+        <description>MADAO&#39;s Blog /posts/intro2computer/ -&lt;h1 id=&#34;基礎計算機概論&#34;&gt;基礎計算機概論&lt;/h1&gt;
+&lt;p&gt;在轉職的期間中面試了幾間的公司，多少需要筆試&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;進位 &lt;a href=&#34;../positionalnotation&#34;&gt;#&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;儲存 &lt;a href=&#34;../storage&#34;&gt;#&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;網路基礎概論 &lt;a href=&#34;../internetintro&#34;&gt;#&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+- /posts/intro2computer/ - This is a customized copyright.</description>
+        </item>
+    
+    
+  </channel>
+</rss> 

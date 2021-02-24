@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nuxt on MADAO&#39;s Blog</title>
+    <link>/tags/nuxt/</link>
+    <description>Recent content in Nuxt on MADAO&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This is a customized copyright.</copyright>
+    <lastBuildDate>Thu, 04 Feb 2021 13:21:39 +0800</lastBuildDate><atom:link href="/tags/nuxt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Nuxt 學習紀錄] Router</title>
+      <link>/posts/nuxt/router/</link>
+      <pubDate>Thu, 04 Feb 2021 13:21:39 +0800</pubDate>
+      
+      <guid>/posts/nuxt/router/</guid>
+      <description>在 Nuxt.js 專案中，不需要透過 VueRouter 設定各個頁面的 URL 以及各種畫面結構安排。
+而是會依據 pages 的目錄結構會自動對應出 VueRouter 的設定。
+Router pages ├ login │ └ index.vue └ admin ├ index.vue └ profile.vue    路由 (URL) page component 路由名稱 (Route Name)     /login pages/login/index.vue login   /admin pages/admin/index.vue admin   /admin/profile pages/admin/profile.vue admin-profile    &amp;lt;NuxtLink to=&amp;quot;/&amp;quot;&amp;gt;Home page&amp;lt;/NuxtLink&amp;gt; 而跳轉路由使用上與 VueRouter 相同。 如果要
+Dynamic Router 在 Nuxt.js 中路由設定是以資料夾結構來設定，而要使用動態路由並傳遞參數時。
+需要建立一個以下底線 開頭的資料夾 _&amp;lt;變數名稱&amp;gt; 或者 Vue 檔案 _&amp;lt;變數名稱&amp;gt;.</description>
+    </item>
+    
+    <item>
+      <title>[Nuxt 學習紀錄] Concept</title>
+      <link>/posts/nuxt/concept/</link>
+      <pubDate>Thu, 04 Feb 2021 13:12:53 +0800</pubDate>
+      
+      <guid>/posts/nuxt/concept/</guid>
+      <description>Views Nuxt.js Application 是由，app template, layout, 以及 page 等 component 所組合而成。
+在不同的 component 中有對應的屬性以及方法可以使用。
+比如：可以在每個 page component 內的 head 中自訂 meta tag 來優化 SEO。 Nuxt Lifecycle 官方文件：Nuxt Lifecycle
+  nuxtServerInit：用於在服務端操作 store 的，實質上就是一個 Action。
+只能被定義於 store/index.js。
+可以帶入 2 個參數。
+ 第一個：Vuex context。 第二個：Nuxt.js context。 // store/index.js export const actions = { nuxtServerInit(Vuex, Nuxt) { // ...  } }     Middleware：頁面渲染之前執行的一個函式，這個函式可以使用在 nuxt.config.js、layouts 、 pages 中
+// middleware/auth.js export default function({store, route, redirect}) { // .</description>
+    </item>
+    
+    <item>
+      <title>[Nuxt 學習紀錄] Initial</title>
+      <link>/posts/nuxt/install/</link>
+      <pubDate>Wed, 03 Feb 2021 19:03:49 +0800</pubDate>
+      
+      <guid>/posts/nuxt/install/</guid>
+      <description>Nuxt.js # Nuxt.js 是基於 Vue.js 的應用框架，支援不同的渲染方式(SSR、SPA 或靜態)。
+install / 安裝 npx create-nuxt-app &amp;lt;project-name&amp;gt; # &amp;lt;project-name&amp;gt; 專案名稱 安裝時需要確認，且可依照專案需求進行設定
+? Project name: # 專案名稱 ? Programming language: # 開發語言：JS or TS ? Package manager: # package 管理器 Npm or Yarn ? UI framework: # UI 框架 ? Nuxt.js modules: # 模組 ? Linting tools: ? Testing framework: # 測試框架 ? Rendering mode: # 渲染模式 &amp;gt; Universal (SSR / SSG) # 伺服器渲染 Single Page App # 單頁式應用 ?</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cookie on MADAO&#39;s Blog</title>
+    <link>/tags/cookie/</link>
+    <description>Recent content in cookie on MADAO&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This is a customized copyright.</copyright>
+    <lastBuildDate>Wed, 03 Feb 2021 14:22:24 +0800</lastBuildDate><atom:link href="/tags/cookie/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cookie</title>
+      <link>/posts/js/cookie/</link>
+      <pubDate>Wed, 03 Feb 2021 14:22:24 +0800</pubDate>
+      
+      <guid>/posts/js/cookie/</guid>
+      <description>Cookie 是什麼？ Cookie 是儲存在瀏覽器的一小段文字資料。只可儲存 4KB 的資料。
+伺服器透過 Set-Cookie header 傳遞給瀏覽器，之後會將 cookie 儲存起來，並在發送 request 時夾帶 cookie 至 server。
+Cookie 的用途？  Session 管理：帳號登入、購物車、遊戲分數，等儲存於 server 上的資訊。 個人化：使用者設定、佈景主題，以及其他設定。 追蹤：記錄並分析使用者行為，或者廣告應用上。  使用 JavaScript 讀取 / 寫入 Cookie 讀取   Vanilla JavaScript - 內建功能 document.cookie
+讀取出來的 document.cookie 為一個字串，此字串是將目前網域底下所有的 cookie 以分號串接以後的結果，其中每個 cookie 都是 [cookie名稱]=[cookie值] 的形式。
+如果要取得特定的 cookie 的值可以透過 String.replace() 加上 RegExp 的方式來取得。#
+// 將 test 改為要取得的 cookie 名稱 const getCookie = document.cookie.replace(/(?:(?:^|.*;\s*)test\s*\=\s*([^;]*).*$)|^.*$/, &amp;#34;$1&amp;#34;);   Library - 使用套件可以方便快速的取得 cookie 的值。</description>
+    </item>
+    
+  </channel>
+</rss>

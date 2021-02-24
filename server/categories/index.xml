@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on MADAO&#39;s Blog</title>
+    <link>/categories/</link>
+    <description>Recent content in Categories on MADAO&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This is a customized copyright.</copyright>
+    <lastBuildDate>Thu, 04 Feb 2021 13:21:39 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nuxt 學習紀錄</title>
+      <link>/categories/nuxt-%E5%AD%B8%E7%BF%92%E7%B4%80%E9%8C%84/</link>
+      <pubDate>Thu, 04 Feb 2021 13:21:39 +0800</pubDate>
+      
+      <guid>/categories/nuxt-%E5%AD%B8%E7%BF%92%E7%B4%80%E9%8C%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>基礎計算機概論</title>
+      <link>/categories/%E5%9F%BA%E7%A4%8E%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/</link>
+      <pubDate>Wed, 03 Feb 2021 14:22:24 +0800</pubDate>
+      
+      <guid>/categories/%E5%9F%BA%E7%A4%8E%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>演算法</title>
+      <link>/categories/%E6%BC%94%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Mon, 01 Feb 2021 14:34:22 +0800</pubDate>
+      
+      <guid>/categories/%E6%BC%94%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

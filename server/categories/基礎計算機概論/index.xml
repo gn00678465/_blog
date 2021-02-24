@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>基礎計算機概論 on MADAO&#39;s Blog</title>
+    <link>/categories/%E5%9F%BA%E7%A4%8E%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/</link>
+    <description>Recent content in 基礎計算機概論 on MADAO&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This is a customized copyright.</copyright>
+    <lastBuildDate>Wed, 03 Feb 2021 14:22:24 +0800</lastBuildDate><atom:link href="/categories/%E5%9F%BA%E7%A4%8E%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cookie</title>
+      <link>/posts/js/cookie/</link>
+      <pubDate>Wed, 03 Feb 2021 14:22:24 +0800</pubDate>
+      
+      <guid>/posts/js/cookie/</guid>
+      <description>Cookie 是什麼？ Cookie 是儲存在瀏覽器的一小段文字資料。只可儲存 4KB 的資料。
+伺服器透過 Set-Cookie header 傳遞給瀏覽器，之後會將 cookie 儲存起來，並在發送 request 時夾帶 cookie 至 server。
+Cookie 的用途？  Session 管理：帳號登入、購物車、遊戲分數，等儲存於 server 上的資訊。 個人化：使用者設定、佈景主題，以及其他設定。 追蹤：記錄並分析使用者行為，或者廣告應用上。  使用 JavaScript 讀取 / 寫入 Cookie 讀取   Vanilla JavaScript - 內建功能 document.cookie
+讀取出來的 document.cookie 為一個字串，此字串是將目前網域底下所有的 cookie 以分號串接以後的結果，其中每個 cookie 都是 [cookie名稱]=[cookie值] 的形式。
+如果要取得特定的 cookie 的值可以透過 String.replace() 加上 RegExp 的方式來取得。#
+// 將 test 改為要取得的 cookie 名稱 const getCookie = document.cookie.replace(/(?:(?:^|.*;\s*)test\s*\=\s*([^;]*).*$)|^.*$/, &amp;#34;$1&amp;#34;);   Library - 使用套件可以方便快速的取得 cookie 的值。</description>
+    </item>
+    
+    <item>
+      <title>網路基礎</title>
+      <link>/posts/internetintro/</link>
+      <pubDate>Fri, 29 Jan 2021 19:42:05 +0800</pubDate>
+      
+      <guid>/posts/internetintro/</guid>
+      <description>瀏覽器上所顯示的頁面資料是如何而來的?
+當在瀏覽器輸入網址並送出後，到底發生了什麼事？
+在了解之前先了解一下基本名詞。
+基本名詞  IP / Internet Protocol #  IP 定義了定址方法和資料報的封裝結構，任務僅僅是根據源主機和目的主機的位址來傳送資料。 IP 由 4 組 4 個數字組成，每組的範圍是 0 ~ 255。
+  Domain Name / 域名 #  IP 位置是以沒有含意的數字組成 人類不好記憶，而域名可以視為 IP 地址的代稱，主要為了方便記憶。
+  DNS / Domain Name System #  主要將方便記憶的 Domain Name 轉換為 Server 的 IP 位置。
+   粗略流程 sequenceDiagram participant Client participant DNS Client--&amp;gt;&amp;gt;DNS: Domain 的 IP? DNS--&amp;gt;&amp;gt;Client: Server 的 IP 是 xxx.</description>
+    </item>
+    
+    <item>
+      <title>儲存空間單位</title>
+      <link>/posts/storage/</link>
+      <pubDate>Fri, 29 Jan 2021 19:40:41 +0800</pubDate>
+      
+      <guid>/posts/storage/</guid>
+      <description>基本名詞  Bit / 位元  儲存的最小單位，只能儲存 0 、 1 。
+  Byte / 位元組  一個位元組代表八個位元。
+  KB / Kilobyte  Kilo + byte 。 1KB = 1024 bytes
+  MB / Megabyte  Mega + byte 。 1MB = 1024 KB
+  GB / Gigabyte  Giga + byte 。 1GB = 1024 MB
+   數字的儲存方式 正整數 通常數字使用 32 個 bit 來儲存，也就是 4 bytes。</description>
+    </item>
+    
+    <item>
+      <title>進位</title>
+      <link>/posts/positionalnotation/</link>
+      <pubDate>Fri, 29 Jan 2021 16:29:57 +0800</pubDate>
+      
+      <guid>/posts/positionalnotation/</guid>
+      <description>進位制是一種記數方式。利用這種記數法，可以使用有限種數字符號來表示所有的數值。
+  十進位    基數 進位制     10 十進位    世界上最常見的算術運算位進制系統。其十位數字為 「0-9」。 當碰到十本身就會進位。
+0, 1, 2, 3, 4, 5, 6, 7 ,8 ,9 =(進位)&amp;gt; 10, 11 ~~ 99 =(進位)&amp;gt; 100 ... 以數學來表示 以 10 為基數
+$ 123 = 1 * 10^2 + 2 * 10^1 + 3 * 10^0 $
+ 二進位    基數 進位制     2 二進位    幾乎所有的電子計算機內部都使用二進位制，分別為「0」和「1」表示「關」和「開」。 當碰到 2 本身就會進位。</description>
+    </item>
+    
+    <item>
+      <title>基礎計算機概論</title>
+      <link>/posts/intro2computer/</link>
+      <pubDate>Fri, 29 Jan 2021 16:00:28 +0800</pubDate>
+      
+      <guid>/posts/intro2computer/</guid>
+      <description>基礎計算機概論 在轉職的期間中面試了幾間的公司，多少需要筆試
+ 進位 # 儲存 # 網路基礎概論 #  </description>
+    </item>
+    
+  </channel>
+</rss>

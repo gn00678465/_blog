@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on MADAO&#39;s Blog</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on MADAO&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This is a customized copyright.</copyright>
+    <lastBuildDate>Thu, 04 Feb 2021 13:21:39 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Nuxt 學習紀錄] Router</title>
+      <link>/posts/nuxt/router/</link>
+      <pubDate>Thu, 04 Feb 2021 13:21:39 +0800</pubDate>
+      
+      <guid>/posts/nuxt/router/</guid>
+      <description>在 Nuxt.js 專案中，不需要透過 VueRouter 設定各個頁面的 URL 以及各種畫面結構安排。
+而是會依據 pages 的目錄結構會自動對應出 VueRouter 的設定。
+Router pages ├ login │ └ index.vue └ admin ├ index.vue └ profile.vue    路由 (URL) page component 路由名稱 (Route Name)     /login pages/login/index.vue login   /admin pages/admin/index.vue admin   /admin/profile pages/admin/profile.vue admin-profile    &amp;lt;NuxtLink to=&amp;quot;/&amp;quot;&amp;gt;Home page&amp;lt;/NuxtLink&amp;gt; 而跳轉路由使用上與 VueRouter 相同。 如果要
+Dynamic Router 在 Nuxt.js 中路由設定是以資料夾結構來設定，而要使用動態路由並傳遞參數時。
+需要建立一個以下底線 開頭的資料夾 _&amp;lt;變數名稱&amp;gt; 或者 Vue 檔案 _&amp;lt;變數名稱&amp;gt;.</description>
+    </item>
+    
+    <item>
+      <title>[Nuxt 學習紀錄] Concept</title>
+      <link>/posts/nuxt/concept/</link>
+      <pubDate>Thu, 04 Feb 2021 13:12:53 +0800</pubDate>
+      
+      <guid>/posts/nuxt/concept/</guid>
+      <description>Views Nuxt.js Application 是由，app template, layout, 以及 page 等 component 所組合而成。
+在不同的 component 中有對應的屬性以及方法可以使用。
+比如：可以在每個 page component 內的 head 中自訂 meta tag 來優化 SEO。 Nuxt Lifecycle 官方文件：Nuxt Lifecycle
+  nuxtServerInit：用於在服務端操作 store 的，實質上就是一個 Action。
+只能被定義於 store/index.js。
+可以帶入 2 個參數。
+ 第一個：Vuex context。 第二個：Nuxt.js context。 // store/index.js export const actions = { nuxtServerInit(Vuex, Nuxt) { // ...  } }     Middleware：頁面渲染之前執行的一個函式，這個函式可以使用在 nuxt.config.js、layouts 、 pages 中
+// middleware/auth.js export default function({store, route, redirect}) { // .</description>
+    </item>
+    
+    <item>
+      <title>[Nuxt 學習紀錄] Initial</title>
+      <link>/posts/nuxt/install/</link>
+      <pubDate>Wed, 03 Feb 2021 19:03:49 +0800</pubDate>
+      
+      <guid>/posts/nuxt/install/</guid>
+      <description>Nuxt.js # Nuxt.js 是基於 Vue.js 的應用框架，支援不同的渲染方式(SSR、SPA 或靜態)。
+install / 安裝 npx create-nuxt-app &amp;lt;project-name&amp;gt; # &amp;lt;project-name&amp;gt; 專案名稱 安裝時需要確認，且可依照專案需求進行設定
+? Project name: # 專案名稱 ? Programming language: # 開發語言：JS or TS ? Package manager: # package 管理器 Npm or Yarn ? UI framework: # UI 框架 ? Nuxt.js modules: # 模組 ? Linting tools: ? Testing framework: # 測試框架 ? Rendering mode: # 渲染模式 &amp;gt; Universal (SSR / SSG) # 伺服器渲染 Single Page App # 單頁式應用 ?</description>
+    </item>
+    
+    <item>
+      <title>Cookie</title>
+      <link>/posts/js/cookie/</link>
+      <pubDate>Wed, 03 Feb 2021 14:22:24 +0800</pubDate>
+      
+      <guid>/posts/js/cookie/</guid>
+      <description>Cookie 是什麼？ Cookie 是儲存在瀏覽器的一小段文字資料。只可儲存 4KB 的資料。
+伺服器透過 Set-Cookie header 傳遞給瀏覽器，之後會將 cookie 儲存起來，並在發送 request 時夾帶 cookie 至 server。
+Cookie 的用途？  Session 管理：帳號登入、購物車、遊戲分數，等儲存於 server 上的資訊。 個人化：使用者設定、佈景主題，以及其他設定。 追蹤：記錄並分析使用者行為，或者廣告應用上。  使用 JavaScript 讀取 / 寫入 Cookie 讀取   Vanilla JavaScript - 內建功能 document.cookie
+讀取出來的 document.cookie 為一個字串，此字串是將目前網域底下所有的 cookie 以分號串接以後的結果，其中每個 cookie 都是 [cookie名稱]=[cookie值] 的形式。
+如果要取得特定的 cookie 的值可以透過 String.replace() 加上 RegExp 的方式來取得。#
+// 將 test 改為要取得的 cookie 名稱 const getCookie = document.cookie.replace(/(?:(?:^|.*;\s*)test\s*\=\s*([^;]*).*$)|^.*$/, &amp;#34;$1&amp;#34;);   Library - 使用套件可以方便快速的取得 cookie 的值。</description>
+    </item>
+    
+    <item>
+      <title>[演算法] Insertion Sort / 插入排序</title>
+      <link>/posts/algorithm/insertion_sort/</link>
+      <pubDate>Mon, 01 Feb 2021 14:34:22 +0800</pubDate>
+      
+      <guid>/posts/algorithm/insertion_sort/</guid>
+      <description>Bubble Sort / 泡沫排序 插入排序與泡沫排序同為排序演算法中比較基礎的方式，所需的時間會隨著數列的長度平方成長。
+排序方式為從一個數列中，由第二個元素開始往前逐一比較，再將元素插入適當的位置。
+可以參考動態的視覺網站，可以比較清楚的知道排序的方式。
+排序流程 假設目前有一數列 [8, 5, 10, 6]
+ 第一輪排序。  取 5 開始往前比較， 8 &amp;gt; 5 ，交換。[5, 8, 10, 6]   第二輪排序  取 10 開始往前比較，8 &amp;lt; 10 不交換。 再往前比較， 5 &amp;lt; 10 不交換。[5, 8, 10, 6]   第三輪排序  取 6 開始往前比較， 10 &amp;gt; 6 交換。[5, 8, 6, 10] 再往前比較， 8 &amp;gt; 6 交換。[5, 6, 8, 10] 再往前比較， 5 &amp;lt; 6 不交換。   排序完成   以上流程，排序次數為數列長度 - 1。  時間複雜度  要執行 n - 1 輪，每輪要比較 1 &amp;hellip; n-1 次。   當數列元素有 4 個時，需要比對 $1 + 2 + 3 = 6$ 次。 當數列元素有 5 個時，需要比對 $1 + 2 + 3 + 4 = 10$ 次。 當數列元素有 n 個時，需要比對  $1 + &amp;hellip; (n - 1) = (n * (n - 1))/2 = n^2/2 - n/2$ (等差級數) 當 n 有無限 $\infty$ 多個元素時，平方以外的值可以忽略不計。   Insertion Sort 的時間複雜度為 $O(n^2)$，平方成長。  JavaScript 插入排序 function insertionSort(arr) { for (let i = 1; i &amp;lt; arr.</description>
+    </item>
+    
+    <item>
+      <title>[演算法] Bubble Sort / 泡沫排序</title>
+      <link>/posts/algorithm/bubble_sort/</link>
+      <pubDate>Mon, 01 Feb 2021 10:49:42 +0800</pubDate>
+      
+      <guid>/posts/algorithm/bubble_sort/</guid>
+      <description>Bubble Sort / 泡沫排序 泡沫排序是排序演算法中比較基礎的方式，所需的時間會隨著數列的長度平方成長。
+排序方式為從一個數列中，由左至右取出兩個元素比較，將較大的元素與較小的元素交換，反之則不動，直到整個數列排序完成。
+可以參考動態的視覺網站，可以比較清楚的知道排序的方式。
+排序流程 假設目前有一數列 [8, 5, 10, 6]
+ 第一輪排序。  $8 &amp;gt; 5$ 交換。[5, 8, 10, 6] $8 &amp;lt; 10$ 不須交換。 $10 &amp;gt; 6$ 交換。[5, 8, 6, 10]   最大值 10 排到最右邊，共比對 3 次。   第二輪排序。  $5 &amp;lt; 8$ 不須交換。 $8 &amp;gt; 6$ 交換。[5, 6, 8, 10]   只需比對到倒數第二個，共比對 2 次。   第三輪排序  $5 &amp;lt; 6$ 不須交換。   只需比對到倒數第三個，共比對 1 次。 [5, 6, 8, 10]   排序完成   以上流程，排序次數為數列長度 - 1。  時間複雜度  要執行 n - 1 輪，每輪要比較 n-1 &amp;hellip; 1 次。   當數列元素有 4 個時，需要比對 $3 + 2 + 1 = 6$ 次。 當數列元素有 5 個時，需要比對 $4 + 3 + 2 + 1 = 10$ 次。 當數列元素有 n 個時，需要比對  $(n-1) + (n-2) + &amp;hellip; + 1 = (n * (n - 1))/2 = n^2/2 - n/2$ (等差級數) 當 n 有無限 $\infty$ 多個元素時，平方以外的值可以忽略不計。   Bubble Sort 的時間複雜度為 $O(n^2)$，平方成長。  JavaScript 泡沫排序 function bubbleSort(arr) { for (let i = arr.</description>
+    </item>
+    
+    <item>
+      <title>網路基礎</title>
+      <link>/posts/internetintro/</link>
+      <pubDate>Fri, 29 Jan 2021 19:42:05 +0800</pubDate>
+      
+      <guid>/posts/internetintro/</guid>
+      <description>瀏覽器上所顯示的頁面資料是如何而來的?
+當在瀏覽器輸入網址並送出後，到底發生了什麼事？
+在了解之前先了解一下基本名詞。
+基本名詞  IP / Internet Protocol #  IP 定義了定址方法和資料報的封裝結構，任務僅僅是根據源主機和目的主機的位址來傳送資料。 IP 由 4 組 4 個數字組成，每組的範圍是 0 ~ 255。
+  Domain Name / 域名 #  IP 位置是以沒有含意的數字組成 人類不好記憶，而域名可以視為 IP 地址的代稱，主要為了方便記憶。
+  DNS / Domain Name System #  主要將方便記憶的 Domain Name 轉換為 Server 的 IP 位置。
+   粗略流程 sequenceDiagram participant Client participant DNS Client--&amp;gt;&amp;gt;DNS: Domain 的 IP? DNS--&amp;gt;&amp;gt;Client: Server 的 IP 是 xxx.</description>
+    </item>
+    
+    <item>
+      <title>儲存空間單位</title>
+      <link>/posts/storage/</link>
+      <pubDate>Fri, 29 Jan 2021 19:40:41 +0800</pubDate>
+      
+      <guid>/posts/storage/</guid>
+      <description>基本名詞  Bit / 位元  儲存的最小單位，只能儲存 0 、 1 。
+  Byte / 位元組  一個位元組代表八個位元。
+  KB / Kilobyte  Kilo + byte 。 1KB = 1024 bytes
+  MB / Megabyte  Mega + byte 。 1MB = 1024 KB
+  GB / Gigabyte  Giga + byte 。 1GB = 1024 MB
+   數字的儲存方式 正整數 通常數字使用 32 個 bit 來儲存，也就是 4 bytes。</description>
+    </item>
+    
+    <item>
+      <title>進位</title>
+      <link>/posts/positionalnotation/</link>
+      <pubDate>Fri, 29 Jan 2021 16:29:57 +0800</pubDate>
+      
+      <guid>/posts/positionalnotation/</guid>
+      <description>進位制是一種記數方式。利用這種記數法，可以使用有限種數字符號來表示所有的數值。
+  十進位    基數 進位制     10 十進位    世界上最常見的算術運算位進制系統。其十位數字為 「0-9」。 當碰到十本身就會進位。
+0, 1, 2, 3, 4, 5, 6, 7 ,8 ,9 =(進位)&amp;gt; 10, 11 ~~ 99 =(進位)&amp;gt; 100 ... 以數學來表示 以 10 為基數
+$ 123 = 1 * 10^2 + 2 * 10^1 + 3 * 10^0 $
+ 二進位    基數 進位制     2 二進位    幾乎所有的電子計算機內部都使用二進位制，分別為「0」和「1」表示「關」和「開」。 當碰到 2 本身就會進位。</description>
+    </item>
+    
+    <item>
+      <title>基礎計算機概論</title>
+      <link>/posts/intro2computer/</link>
+      <pubDate>Fri, 29 Jan 2021 16:00:28 +0800</pubDate>
+      
+      <guid>/posts/intro2computer/</guid>
+      <description>基礎計算機概論 在轉職的期間中面試了幾間的公司，多少需要筆試
+ 進位 # 儲存 # 網路基礎概論 #  </description>
+    </item>
+    
+  </channel>
+</rss>
